@@ -10,5 +10,5 @@ rvm:
   - 1.9.3
   - 2.0.0
 before_script:
-  - "cp spec/application.yml.sample spec/application.yml"
+  - "cp spec/application.sample.yml spec/application.yml"
 script: "bundle exec rspec"
