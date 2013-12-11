@@ -34,7 +34,7 @@ module YahooParseApi
     # @param [Hash] option yahoo parse api option see: http://developer.yahoo.co.jp/webapi/jlp/ma/v1/parse.html
     # @param [Symbol] method :GET or :POST
     # @return
-    def parse(sentence='', option={results: :ma}, method=:GET)
+    def parse(sentence='', option={}, method=:GET)
       params = {
           appid: @app_key,
           sentence: sentence
@@ -45,10 +45,12 @@ module YahooParseApi
         url << parameterize(params)
         HTTParty.get(url).parsed_response
       elsif method == :POST
-        HTTParty.post("#{SITE_URL}", {body: params}).parsed_response
+        response = HTTParty.post("#{SITE_URL}", {body: params})
+        raise YahooParseApiError.new(response.message) if response.code == 413
+        response.parsed_response
       else
         # invalid arguments
-        raise YahooKeyPhraseApiError.new('invalid request method')
+        raise YahooParseApiError.new('invalid request method')
       end
     end
 
