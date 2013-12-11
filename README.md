@@ -1,4 +1,6 @@
 # Yahoo Parse Api Client
+[![Build Status](https://travis-ci.org/kyohei8/yahoo_parse_api.png)](https://travis-ci.org/kyohei8/yahoo_parse_api)
+[![Gem Version](https://badge.fury.io/rb/yahoo_parse_api.png)](http://badge.fury.io/rb/yahoo_parse_api)
 
 This is Yahoo Parse Api Client for ruby.
 
