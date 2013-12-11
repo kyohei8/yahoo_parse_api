@@ -1,3 +1,4 @@
+# encoding: utf-8
 require 'yahoo_parse_api/version'
 require 'httparty'
 
