@@ -84,3 +84,8 @@ result = yp.parse('庭には二羽ニワトリがいる。', {
 3. Commit your changes (`git commit -am 'Add some feature'`)
 4. Push to the branch (`git push origin my-new-feature`)
 5. Create new Pull Request
+
+
+## for Japanese
+
+[Yahoo!の日本語形態素解析APIのgemを作ってみた](http://kyohei8.hatenablog.com/entry/2013/12/14/125726)
