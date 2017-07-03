@@ -16,9 +16,9 @@ describe 'YahooParseApi Spec' do
 
     it 'should correctly parse. (case GET)' do
       res = @yp.parse('庭には二羽ニワトリがいる。', {
-          results: 'ma,uniq',
-          response: 'surface,reading,pos,baseform,feature',
-          filter: '9|1'
+        results: 'ma,uniq',
+        response: 'surface,reading,pos,baseform,feature',
+        filter: '9|1'
       })
       expect(res).not_to be_nil
       # travisで拾えるかな？
@@ -46,9 +46,9 @@ describe 'YahooParseApi Spec' do
 
     it 'should correctly parse. (case POST)' do
       res = @yp.parse('庭には二羽ニワトリがいる。', {
-          results: 'ma,uniq',
-          response: 'surface,reading,pos,baseform,feature',
-          filter: 9
+        results: 'ma,uniq',
+        response: 'surface,reading,pos,baseform,feature',
+        filter: 9
       }, :POST)
 
       expect(res).not_to be_nil
@@ -78,7 +78,7 @@ describe 'YahooParseApi Spec' do
 
     it 'should correctly parse. pattern:results=ma' do
       res = @yp.parse('庭には二羽ニワトリがいる。', {
-          results: 'ma'
+        results: 'ma'
       })
       expect(res).not_to be_nil
       expect(res['ResultSet']['ma_result']).not_to be_nil
@@ -87,7 +87,7 @@ describe 'YahooParseApi Spec' do
 
     it 'should correctly parse. pattern:results=uniq' do
       res = @yp.parse('庭には二羽ニワトリがいる。', {
-          results: 'uniq'
+        results: 'uniq'
       })
       expect(res).not_to be_nil
       expect(res['ResultSet']['ma_result']).to be_nil
@@ -96,8 +96,8 @@ describe 'YahooParseApi Spec' do
 
     it 'should correctly parse. with uniq_by_baseform' do
       res = @yp.parse('庭には二羽ニワトリがいる。', {
-          results: 'uniq',
-          uniq_by_baseform: 'true'
+        results: 'uniq',
+        uniq_by_baseform: 'true'
       })
       expect(res).not_to be_nil
       expect(res['ResultSet']['ma_result']).to be_nil
@@ -109,24 +109,24 @@ describe 'YahooParseApi Spec' do
 
     it 'appid is nil' do
       YahooParseApi::Config.app_id = nil
-      lambda {
+      expect {
         YahooParseApi::Parse.new
-      }.should raise_error(YahooParseApi::YahooParseApiError, 'please set app key before use')
+      }.to raise_error(YahooParseApi::YahooParseApiError, 'please set app key before use')
     end
 
     it 'invalid arguments' do
-      lambda {
+      expect {
         @yp.parse('庭には二羽ニワトリがいる。', {}, :NG)
-      }.should raise_error(YahooParseApi::YahooParseApiError, 'invalid request method')
+      }.to raise_error(YahooParseApi::YahooParseApiError, 'invalid request method')
     end
 
     it 'Error:413, Request Entity Too Large' do
       large_file = File.dirname(__FILE__) + '/LargeData.txt'
       p "#{(FileTest.size?(large_file)/1024)}KB" # its 33KB! why error? :(
       c = File.read(large_file, encding: Encoding::UTF_8)
-      lambda {
+      expect {
         @yp.parse(c, {}, :POST)
-      }.should raise_error(YahooParseApi::YahooParseApiError, 'Request Entity Too Large')
+      }.to raise_error(YahooParseApi::YahooParseApiError, 'Request Entity Too Large')
     end
   end
 
