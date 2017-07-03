@@ -3,7 +3,7 @@ require 'yahoo_parse_api/version'
 require 'httparty'
 
 module YahooParseApi
-  SITE_URL = 'http://jlp.yahooapis.jp/MAService/V1/parse'
+  SITE_URL = 'https://jlp.yahooapis.jp/MAService/V1/parse'
 
   class YahooParseApiError < StandardError
   end
